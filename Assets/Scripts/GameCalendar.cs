@@ -34,6 +34,7 @@ public class GameCalendar : MonoBehaviour
 
         foreach (ICalendarEvent calEvent in calendarEvents)
         {
+            calEvent.Init();
             int curr = calEvent.startDate;
             while (curr <= calEvent.endDate)
             {
@@ -80,7 +81,6 @@ public class GameCalendar : MonoBehaviour
         }
 
         int current_day = m_season * 7 + m_day;
-        Debug.Log(current_day);
         if (m_calendar_days.activeSelf) 
             m_calendar_days.transform.GetChild(current_day - 1).GetComponent<Image>().color = HIGHILIGHT_COLOR;
 
