@@ -16,6 +16,7 @@ public class GameCalendar : MonoBehaviour
     private float m_cell_height;
     private Color m_default_cell_color;
 
+    private GameObject m_calendar_days;
     private GameObject m_calendar_text;
     private int m_season = 0;
     private int m_day = 1;
@@ -25,8 +26,9 @@ public class GameCalendar : MonoBehaviour
     void Start()
     {
         m_calendar_text = GameObject.Find("CalendarText");
+        m_calendar_days = GameObject.Find("CalendarDays");
 
-        GridLayoutGroup lg = GetComponent<GridLayoutGroup>();
+        GridLayoutGroup lg = m_calendar_days.GetComponent<GridLayoutGroup>();
         m_cell_width = lg.cellSize.x;
         m_cell_height = lg.cellSize.y;
 
@@ -35,14 +37,14 @@ public class GameCalendar : MonoBehaviour
             int curr = calEvent.startDate;
             while (curr <= calEvent.endDate)
             {
-                var obj = Instantiate(calEvent.eventIconPrefab, this.transform.GetChild(curr-1).transform);
+                var obj = Instantiate(calEvent.eventIconPrefab, m_calendar_days.transform.GetChild(curr-1).transform);
                 obj.transform.localPosition = new Vector3(0, 0, obj.transform.position.z);
                 curr++;
             }
         }
 
         // Get default cell color
-        m_default_cell_color = transform.GetChild(0).GetComponent<Image>().color;
+        m_default_cell_color = m_calendar_days.transform.GetChild(0).GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -69,10 +71,23 @@ public class GameCalendar : MonoBehaviour
         m_calendar_text.GetComponent<TMP_Text>().text = SEASONS[m_season] + " - Day " + m_day;
 
         // Color the current day differently
-        foreach(Transform child in transform)
+        if (m_calendar_days.activeSelf)
         {
-            child.GetComponent<Image>().color = m_default_cell_color;
+            foreach (Transform child in m_calendar_days.transform)
+            {
+                child.GetComponent<Image>().color = m_default_cell_color;
+            }
         }
-        transform.GetChild(m_season * 7 + (m_day - 1)).GetComponent<Image>().color = HIGHILIGHT_COLOR;
+
+        int current_day = m_season * 7 + m_day;
+        Debug.Log(current_day);
+        if (m_calendar_days.activeSelf) 
+            m_calendar_days.transform.GetChild(current_day - 1).GetComponent<Image>().color = HIGHILIGHT_COLOR;
+
+        // Call the calendar events
+        foreach(ICalendarEvent cal_event in calendarEvents)
+        {
+            cal_event.OnEvent(current_day);
+        }
     }
 }

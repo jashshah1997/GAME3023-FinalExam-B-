@@ -6,5 +6,5 @@ public abstract class ICalendarEvent : ScriptableObject
     public int endDate;
     public GameObject eventIconPrefab;
 
-    public abstract void OnEvent();
+    public abstract void OnEvent(int currentDay);
 }
