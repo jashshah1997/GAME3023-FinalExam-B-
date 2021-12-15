@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameCalendar : MonoBehaviour
 {
     private static readonly string[] SEASONS = { "Winter", "Spring", "Summer", "Autumn" };
-    private static readonly float DAY_DURATION = 1f;
+    public float DAY_DURATION = 1f;
     private static readonly Color HIGHILIGHT_COLOR = new Color(255, 255, 255, 255);
 
     public List<ICalendarEvent> calendarEvents;
@@ -78,7 +78,8 @@ public class GameCalendar : MonoBehaviour
             m_season = 0;
         }
 
-        m_calendar_text.GetComponent<TMP_Text>().text = SEASONS[m_season] + " - Day " + m_day;
+        float hours = m_curr_day_counter / (DAY_DURATION / 24);
+        m_calendar_text.GetComponent<TMP_Text>().text = SEASONS[m_season] + " - Day " + m_day + " - " + Mathf.RoundToInt(hours) + ":00";
 
         // Color the current day differently
         if (m_calendar_days.activeSelf)
