@@ -38,8 +38,17 @@ public class GameCalendar : MonoBehaviour
             int curr = calEvent.startDate;
             while (curr <= calEvent.endDate)
             {
+                int placed_events = m_calendar_days.transform.GetChild(curr - 1).childCount;
                 var obj = Instantiate(calEvent.eventIconPrefab, m_calendar_days.transform.GetChild(curr-1).transform);
-                obj.transform.localPosition = new Vector3(0, 0, obj.transform.position.z);
+                float offset_x = 0;
+                float offset_y = 0;
+
+                if (placed_events > 0)
+                {
+                    offset_x = m_cell_width / 3.0f * placed_events;
+                    offset_y = m_cell_height / 3.0f * placed_events;
+                }
+                obj.transform.localPosition = new Vector3(offset_x, offset_y, obj.transform.position.z);
                 curr++;
             }
         }
