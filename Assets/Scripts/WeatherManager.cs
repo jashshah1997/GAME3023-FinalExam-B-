@@ -11,6 +11,7 @@ public class WeatherManager : MonoBehaviour
     
     private Color m_default_sun_color;
     private static readonly Color WINTER_SUN_COLOR = new Color(0.6941177f, 0.8192417f, 0.8826951f, 1f);
+    private static readonly Color BRIGHT_SUN_COLOR = new Color(0.8113208f, 0.8679245f, 0.5764329f, 1f);
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,12 @@ public class WeatherManager : MonoBehaviour
     {
         Sun.GetComponent<Light2D>().color = WINTER_SUN_COLOR;
     }
-    
+
+    public void SetSummerSunColor()
+    {
+        Sun.GetComponent<Light2D>().color = BRIGHT_SUN_COLOR;
+    }
+
     public void SetDefaultSunColor()
     {
         Sun.GetComponent<Light2D>().color = m_default_sun_color;
