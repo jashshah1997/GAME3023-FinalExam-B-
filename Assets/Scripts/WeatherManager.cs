@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+/**
+ * Helper class to easily change the game weather.
+ */
 public class WeatherManager : MonoBehaviour
 {
     public GameObject Rain;

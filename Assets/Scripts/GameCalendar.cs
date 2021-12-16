@@ -4,13 +4,18 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/**
+ * The GameCalendar script takes care of passing time and handles the calendar events.
+ */
 public class GameCalendar : MonoBehaviour
 {
     private static readonly string[] SEASONS = { "Winter", "Spring", "Summer", "Autumn" };
-    public float DAY_DURATION = 1f;
     private static readonly Color HIGHILIGHT_COLOR = new Color(255, 255, 255, 255);
 
+    // List of all the calendar events
     public List<ICalendarEvent> calendarEvents;
+    // Day duration in seconds
+    public float DayDuration = 1f;
 
     private float m_cell_width;
     private float m_cell_height;
@@ -61,7 +66,7 @@ public class GameCalendar : MonoBehaviour
     void Update()
     {
         m_curr_day_counter += Time.deltaTime;
-        if (m_curr_day_counter > DAY_DURATION)
+        if (m_curr_day_counter > DayDuration)
         {
             m_curr_day_counter = 0;
             m_day++;
@@ -78,7 +83,7 @@ public class GameCalendar : MonoBehaviour
             m_season = 0;
         }
 
-        float hours = m_curr_day_counter / (DAY_DURATION / 24);
+        float hours = m_curr_day_counter / (DayDuration / 24);
         m_calendar_text.GetComponent<TMP_Text>().text = SEASONS[m_season] + " - Day " + m_day + " - " + Mathf.RoundToInt(hours) + ":00";
 
         // Color the current day differently
