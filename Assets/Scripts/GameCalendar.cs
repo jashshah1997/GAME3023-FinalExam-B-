@@ -16,6 +16,8 @@ public class GameCalendar : MonoBehaviour
     public List<ICalendarEvent> calendarEvents;
     // Day duration in seconds
     public float DayDuration = 1f;
+    // Pause the game time to test events
+    public bool PauseTime = false;
 
     private float m_cell_width;
     private float m_cell_height;
@@ -65,7 +67,8 @@ public class GameCalendar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_curr_day_counter += Time.deltaTime;
+        if (!PauseTime) m_curr_day_counter += Time.deltaTime;
+
         if (m_curr_day_counter > DayDuration)
         {
             m_curr_day_counter = 0;

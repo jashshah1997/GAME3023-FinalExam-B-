@@ -18386,13 +18386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0181464ce188e974ab2f5e4142374dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DAY_DURATION: 1
   calendarEvents:
   - {fileID: 11400000, guid: 67079942a80f7d54998998fd77b91004, type: 2}
-  - {fileID: 11400000, guid: b9837a08a5885bd4da9b13b7c6d8c352, type: 2}
-  - {fileID: 11400000, guid: 5c33f540fb22282488fb1ec74a853c8f, type: 2}
-  - {fileID: 11400000, guid: 1f0124b08e3e7a3489311861a9389f31, type: 2}
-  - {fileID: 11400000, guid: 4de4cb7a7bc6205408a02f8a61169d47, type: 2}
+  DayDuration: 1
+  PauseTime: 0
 --- !u!4 &1701993680
 Transform:
   m_ObjectHideFlags: 0
